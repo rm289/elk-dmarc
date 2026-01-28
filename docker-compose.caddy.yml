@@ -1,0 +1,22 @@
+services:
+  caddy:
+    image: caddy:2
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - kibana
+
+  kibana:
+    # Override any host port mapping; only reachable via Caddy on 443
+    ports: []
+
+volumes:
+  caddy-data: {}
+  caddy-config: {}

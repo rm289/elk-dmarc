@@ -1,0 +1,9 @@
+dmarctest.patmossec.cc {
+    encode zstd gzip
+    tls admin@patmossec.live
+    reverse_proxy https://kibana:5601 {
+        transport http {
+            tls_insecure_skip_verify
+        }
+    }
+}
